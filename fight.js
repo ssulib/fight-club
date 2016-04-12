@@ -9,9 +9,13 @@ class Character {
     this.defense = defense;
   }
 }
-
+// Attack Character Function
 Character.prototype.attackCharacter = function(defender) {
-  // Implement me!
+  var baseDmg = this.attack - defender.defense;
+  var randomDmg = floor(Math.Random()*6);
+  var totalDmg = randomDmg + baseDmg;
+  defender.health = defender.health - totalDmg;
+  console.log(this.name + " does " + totalDmg + " damage to " + defender.name);
 }
 
 // Main Fight Logic
@@ -25,8 +29,23 @@ while (player.health && enemy.health) {
   console.log('');
 }
 
+//runRound Process to display health and check for end game
 function runRound(round, p1, p2) {
-  // Implement me!
+  console.log("----- Round " + round + " -----");
+  p1.attackCharacter(p2);
+  if(p2.health<=0){
+    console.log(p1.name + " health: " + p1.health);
+    console.log(p2.name + " health: " + p2.health);
+    function endGame(p1, p2);
+  }
+  p2.attackCharacter(p1);
+  if(p1.health<=0){
+    console.log(p1.name + " health: " + p1.health);
+    console.log(p2.name + " health: " + p2.health);
+    function endGame(p2, p1);
+  }
+  console.log(p1.name + " health: " + p1.health);
+  console.log(p2.name + " health: " + p2.health);
 }
 
 function endGame(winner, loser) {
